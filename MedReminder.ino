@@ -1,36 +1,46 @@
-#include <LiquidCrystal_I2C.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include <Arduino.h>
 
 // WiFi credentials
-const char* ssid ="ETC_413";
-const char* password = "99551122";
+const char* ssid = "Airtel_Nokia";
+const char* password = "Prasad123";
 
 // MQTT broker details
-const char* mqttServer = "172.19.229.158";
+const char* mqttServer = "192.168.1.10";
 const int mqttPort = 1883;
 
 // MQTT topics
-const char* mqttSubtopics[] = {"Morning", "Afternoon", "Evening"};
+const char* mqttSubtopics[] = {"User2/Morning", "User2/Afternoon", "User2/Evening"};
 
 // Hardware pins
 const int ledPins[] = {4, 5, 14}; // Replace with your desired pin numbers
 const int buzzerPin = 15;
 const int switchPin = 12; // Limit switch pin
 
-// LCD setup
-LiquidCrystal_I2C lcd(0x27, 16, 2);
+// OLED display setup
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 32 // OLED display height, in pixels
+#define OLED_RESET -1    // Reset pin # (or -1 if sharing Arduino reset pin)
+#define SCREEN_ADDRESS 0x3C
+
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+String scrollMessage;
+int textWidth;
+const int textSize = 4;  // Text size
+
 
 // MQTT client setup
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-const int ThresholdTime = 60000; //15min
+const int ThresholdTime = 60000; // 15min
 bool randomTimerStarted = false; // To indicate if the random timer has started
 unsigned long randomTimerDuration = 0; // Holds the random timer value (1-10 seconds in ms)
 unsigned long randomTimerStartTime = 0;
-bool TimerStarted  = false;
+bool TimerStarted = false;
 unsigned long TimerStartTime = 0;
 bool SwitchPressed;
 bool LidOpened;
@@ -44,7 +54,7 @@ const unsigned long buzzerDuration = 30000;
 char lastTopic[32]; 
 
 void IRAM_ATTR isr() {
- SwitchPressed = true;
+  SwitchPressed = true;
   LidOpened = true;
   randomTimerStarted = true;
   randomTimerDuration = random(1000, 10000); // Random timer (1-10 seconds)
@@ -61,8 +71,7 @@ void setup() {
 
   pinMode(buzzerPin, OUTPUT);
   pinMode(switchPin, INPUT_PULLUP); // Assuming LOW means closed
-  attachInterrupt(switchPin, isr , RISING);
-
+  attachInterrupt(switchPin, isr, FALLING);
 
   // Start the serial communication
   Serial.begin(115200);
@@ -80,24 +89,30 @@ void setup() {
   client.setCallback(callback);
   client.setKeepAlive(60); // Set keep-alive interval to 60 seconds
   while (!client.connected()) {
-    if (client.connect("ESP32Client")) {
+    if (client.connect("Client2")) {
       Serial.println("Connected to MQTT broker");
       for (int i = 0; i < 3; i++) {
         client.subscribe(mqttSubtopics[i]);
       }
-       client.loop();
-    } 
-    else {
+      client.loop();
+    } else {
       Serial.println("Failed to connect to MQTT broker. Retrying...");
       delay(2000);
     }
-
   }
-   lcd.init();
-  lcd.backlight();
-  lcd.clear();
-}
 
+  // Initialize the OLED display
+   if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
+    Serial.println("SSD1306 allocation failed");
+    for (;;);  // Don't proceed, loop forever
+  }
+  
+  delay(1000);                        // Pause for 2 seconds
+  display.clearDisplay();
+  display.setTextSize(textSize);             // Set text size to 5
+  display.setTextColor(SSD1306_WHITE);// Draw white text
+  display.setCursor(0, 0);  
+}
 
 int subtopicIndex = -1;
 
@@ -121,12 +136,11 @@ void callback(char* topic, byte* payload, unsigned int length) {
     int separatorIndex = message.indexOf(',');
     String time = message.substring(separatorIndex + 1); // Get the medicine time
     String medicineName = message.substring(0, separatorIndex); // Get the medicine name
+    
+    scrollMessage = medicineName;
+    textWidth = textSize * scrollMessage.length() * 6; // Estimate text width (6 pixels per character)
 
-    // Display the medicine name on the LCD
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print(String(subtopicIndex + 1) + ": " + medicineName);
-    Serial.println(String(subtopicIndex + 1) + ": " + medicineName);
+    Serial.println(medicineName);
 
     // Turn on the LED and buzzer for the corresponding subtopic
     digitalWrite(ledPins[subtopicIndex], HIGH);
@@ -140,77 +154,77 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
 }
 
-void loop()
-{
+void loop() {
 
   if (!client.connected()) {
     reconnect();
   }
 
   client.loop(); // Keep MQTT communication alive
-   
- for (int i = 0; i < 3; i++) {
+
+  
+  for (int x = SCREEN_WIDTH; x > -textWidth; x--) {  // Loop from right edge to left beyond text width
+    display.clearDisplay();                     // Clear the display buffer
+    display.setCursor(x, 0);                    // Move cursor to new position
+    display.println(scrollMessage);            // Print the text
+    display.display();                          // Display the buffer on the screen
+    delay(10);                                  // Small delay to control the scrolling speed
+  }
+
+  for (int i = 0; i < 3; i++) {
     if (strcmp(lastTopic, mqttSubtopics[i]) == 0) {
       subtopicIndex = i;
       break;
     }
   }
 
-  if((millis() - TimerStartTime) < ThresholdTime){
-    if(SwitchPressed){
-     if (randomTimerStarted && (millis() - randomTimerStartTime) <= randomTimerDuration) {
-       if (digitalRead(switchPin) == LOW) { // Lid closed within random timer
-         Serial.println("Lid closed within the random timer (Medicine NOT taken)");
-         LidOpened=false;
-         client.publish("alert", "Medicine NOT taken");
-         lcd.clear();
-         lcd.setCursor(0, 0);
-         lcd.print("Medicine NOT taken");
-         resetState(); // Reset everything and exit
-         return;
-        }
-      } 
-
-     // If the random timer expired but lid closed within 1 minute, consider medicine taken
-     if (randomTimerStarted && (millis() - randomTimerStartTime) > randomTimerDuration) 
-     {
-        if (digitalRead(switchPin) == LOW) { // Lid closed within 1 minute after random timer
-         Serial.println("Lid closed after random timer but within 1 minute (Medicine TAKEN)");
-         LidOpened=false;
-         client.publish("alert", "Medicine TAKEN");
-         resetState(); // Reset the state and exit
-         return;
+  if ((millis() - TimerStartTime) < ThresholdTime) {
+    if (SwitchPressed) {
+      if (randomTimerStarted && (millis() - randomTimerStartTime) <= randomTimerDuration) {
+        if (digitalRead(switchPin) == HIGH) { // Lid closed within random timer
+          Serial.println("Lid closed within the random timer (Medicine NOT taken)");
+          LidOpened = false;
+          client.publish("alert", "NOT taken");
+          resetState(); // Reset everything and exit
+          return;
         }
       }
-    }   
-}
-  
- else
-  {
-    if(((millis() - TimerStartTime) > ThresholdTime) && (LidOpened) && (!LidMessagePrinted)){
-      
-      Serial.println("Lid still opened");
-      LidMessagePrinted= true;
-      tone(buzzerPin, 1000);
-      lcd.clear();
-      lcd.setCursor(0, 0);
-      lcd.print("Lid still opened");
-      if(digitalRead(switchPin) == LOW){
-         resetState();
+
+      // If the random timer expired but lid closed within 1 minute, consider medicine taken
+      if (randomTimerStarted && (millis() - randomTimerStartTime) > randomTimerDuration) {
+        if (digitalRead(switchPin) == HIGH) { // Lid closed within 1 minute after random timer
+          Serial.println("Lid closed after random timer but within 1 minute (Medicine TAKEN)");
+          LidOpened = false;
+          client.publish("alert", "TAKEN");
+          resetState(); // Reset the state and exit
+          return;
+        }
       }
     }
-    if(((millis() - TimerStartTime) > ThresholdTime) && (!SwitchPressed)  && (!TimerMessagePrinted)){
-    Serial.println("15-minute timer expired");
-    digitalWrite(ledPins[subtopicIndex], HIGH);
-    tone(buzzerPin, 1000);
-    delay(3000);
-    client.publish("alert", "Medicine NOT TAKEN");
-    resetState();
-    TimerMessagePrinted = true; // Reset the state and exit
-    return;
+  } else {
+    if (((millis() - TimerStartTime) > ThresholdTime) && (LidOpened) && (!LidMessagePrinted)) {
+      Serial.println("Lid still opened");
+      LidMessagePrinted = true;
+      display.clearDisplay();
+      display.setCursor(0, 0);
+      display.print("Lid still opened");
+      display.display();
+      if (digitalRead(switchPin) == HIGH) {
+        resetState();
+      }
+    }
+    if (((millis() - TimerStartTime) > ThresholdTime) && (!SwitchPressed) && (!TimerMessagePrinted)) {
+      Serial.println("15-minute timer expired");
+      digitalWrite(ledPins[subtopicIndex], HIGH);
+      tone(buzzerPin, 1000);
+      delay(3000);
+      client.publish("alert", "NOT TAKEN");
+      resetState();
+      TimerMessagePrinted = true; // Reset the state and exit
+      return;
     }
   }
-  if (buzzerOn && (millis() - buzzerStartTime) >= buzzerDuration) {
+  if (buzzerOn && (millis() - buzzerStartTime) >= buzzerDuration && !SwitchPressed) {
     tone(buzzerPin, 0); // Turn off the buzzer
     buzzerOn = false;
   }
@@ -222,7 +236,9 @@ void resetState() {
     digitalWrite(ledPins[i], LOW);
   }
   tone(buzzerPin, 0); // Stop the buzzer
-  lcd.clear(); // Clear the LCD screen
+  display.clearDisplay(); // Clear the OLED screen
+  display.display(); // Refresh the display
+  
   // Reset timer flags
   TimerStarted = false;
   randomTimerStarted = false;
@@ -233,7 +249,7 @@ void reconnect() {
   while (!client.connected()) {
     Serial.println("Attempting MQTT connection...");
     
-    if (client.connect("ESP32Client")) { // Adjust the client ID as needed
+    if (client.connect("Client2")) { // Adjust the client ID as needed
       Serial.println("Connected to MQTT broker");
       for (int i = 0; i < 3; i++) {
         client.subscribe(mqttSubtopics[i]);
@@ -244,5 +260,3 @@ void reconnect() {
     }
   }
 }
-
-
