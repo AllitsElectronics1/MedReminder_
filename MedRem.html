@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ESP32 Medicine Scheduler</title>
+</head>
+<body>
+    <h1>Send Medicine Names to ESP32</h1>
+    
+    <h2>Morning Medicine</h2>
+    <form action="send-medicine.php" method="post">
+        <input type="hidden" name="timing" value="morning">
+        <label for="morning">Medicine:</label>
+        <input type="text" id="morning" name="medicine" required>
+        <button type="submit">Send Morning Medicine</button>
+    </form>
+
+    <h2>Afternoon Medicine</h2>
+    <form action="send-medicine.php" method="post">
+        <input type="hidden" name="timing" value="afternoon">
+        <label for="afternoon">Medicine:</label>
+        <input type="text" id="afternoon" name="medicine" required>
+        <button type="submit">Send Afternoon Medicine</button>
+    </form>
+
+    <h2>Evening Medicine</h2>
+    <form action="send-medicine.php" method="post">
+        <input type="hidden" name="timing" value="evening">
+
+        <label for="evening">Medicine:</label>
+        <input type="text" id="evening" name="medicine" required>
+        <button type="submit">Send Evening Medicine</button>
+    </form>
+</body>
+</html>
