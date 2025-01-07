@@ -1,6 +1,6 @@
 /* 
-   registers the esp device in database with its mac adress and updtaes it with respective ip address.
-   updates the medicine status for respective mac and med name.
+   registers the esp device in database with its mac adress and its respective ip address.
+   updates the medicine status to the database for respective mac and med name.
 */
 
 <?php
