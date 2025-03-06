@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="52.07" height="36.88" viewBox="0 0 52.07 36.88">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_4" data-name="Rectangle 4" width="52.07" height="36.88" transform="translate(708 279)" fill="#1abcfe"/>
+    </clipPath>
+  </defs>
+  <g id="Mask_Group_1" data-name="Mask Group 1" transform="translate(-708 -279)" clip-path="url(#clip-path)">
+    <path id="figma-svgrepo-com" d="M21.277,2.837V26.951m0,0v5.674A5.674,5.674,0,1,1,15.6,26.951m5.674,0H15.6m0,0a5.674,5.674,0,1,1,0-11.348m0,0h5.674m-5.674,0H26.951M15.6,15.6a5.674,5.674,0,0,1,0-11.348H26.951a5.674,5.674,0,0,1,0,11.348m0,0a5.674,5.674,0,1,1-5.674,5.674A5.674,5.674,0,0,1,26.951,15.6Z" transform="translate(712.758 276.163)" fill="none" stroke="#1abcfe" stroke-width="2.837"/>
+  </g>
+</svg>

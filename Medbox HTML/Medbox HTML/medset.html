@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/fonts/fontawesome/css/all.min.css" rel="stylesheet">
+    <link href="assets/fonts/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <!-- <link href="assets/plugins/simplebar/simplebar.min.css" rel="stylesheet"> -->
+    <!-- <link href="assets/plugins/tinyslider/tiny-slider.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="assets/plugins/izitoast/iziToast.min.css">
+    <!-- <link rel="stylesheet" href="assets/plugins/bootstrap-select/bootstrap-select.min.css"> -->
+    <link rel="stylesheet" href="assets/plugins/mdtimepicker/mdtimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/9.5.4/sweetalert2.min.css">
+    <title>MedBox - Medset</title>
+</head>
+
+<body>
+    <header>
+        <div class="medbox_header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="d-flex justify-content-between">
+                            <a href="#"><img src="assets/img/medreminder_logo.PNG" width="160" alt=""></a>
+                            <button type="submit" class="btn btn-dark login_btn" id="logout"><span class="me-2">Log Out</span><i class='bx bx-lock fs-20'></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="medbox_block mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="mb-5">
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddDevice"><i class='bx bx-plus'></i> Add Device</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card med_shift mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="title">User One</h3>
+                                <div>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#ExportData" class="btn btn-success btn-sm me-2"><i class="fa-solid fa-download"></i> Export</a>
+                                    <a href="#" class="btn btn-danger btn-sm me-2"><i class="fa-solid fa-trash-can"></i> Delete</a>
+                                    <a href="medreminder.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-pencil"></i> Edit</a>
+                                </div>
+                            </div>
+                            <form class="row">
+                                <div class="col-md-4 mt-3">
+                                    <label class="form-label">Patient Name</label>
+                                    <input type="text" class="form-control" id="MedicineName" placeholder="User One" aria-label="DisabledInput" disabled readonly>
+                                </div>
+                                <div class="col-md-4 mt-3">
+                                    <label class="form-label">Mac Address</label>
+                                    <input type="text" class="form-control" id="MedicineName" placeholder="192.168.1.100" aria-label="DisabledInput" disabled readonly>
+                                </div>
+                                <div class="col-md-4 mt-3">
+                                    <label class="form-label">No. of Reminders</label>
+                                    <input type="text" class="form-control" id="MedicineName" placeholder="5" aria-label="DisabledInput" disabled readonly>
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <label class="form-label">Medicine Reminder Shifts</label>
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingOne">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                    Morning
+                                            </button>
+                                            </h2>
+                                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <P class="">No Data. Please Insert Data &nbsp;&nbsp; <a href="medreminder.html">Edit</a></P>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingTwo">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                    Afternoon
+                                            </button>
+                                            </h2>
+                                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <P>No Data. Please Insert Data &nbsp;&nbsp; <a href="medreminder.html">Edit</a></P>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingThree">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                    Evening
+                                            </button>
+                                            </h2>
+                                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <P>No Data. Please Insert Data &nbsp;&nbsp; <a href="medreminder.html">Edit</a></P>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card med_shift mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="title">User Two</h3>
+                                <div>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#ExportData" class="btn btn-success btn-sm me-2"><i class="fa-solid fa-download"></i> Export</a>
+                                    <a href="#" class="btn btn-danger btn-sm me-2"><i class="fa-solid fa-trash-can"></i> Delete</a>
+                                    <a href="medreminder.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-pencil"></i> Edit</a>
+                                </div>
+                            </div>
+                            <form class="row">
+                                <div class="col-md-4 mt-3">
+                                    <label class="form-label">Patient Name</label>
+                                    <input type="text" class="form-control" id="MedicineName" placeholder="User Two" aria-label="DisabledInput" disabled readonly>
+                                </div>
+                                <div class="col-md-4 mt-3">
+                                    <label class="form-label">Mac Address</label>
+                                    <input type="text" class="form-control" id="MedicineName" placeholder="192.168.1.100" aria-label="DisabledInput" disabled readonly>
+                                </div>
+                                <div class="col-md-4 mt-3">
+                                    <label class="form-label">No. of Reminders</label>
+                                    <input type="text" class="form-control" id="MedicineName" placeholder="5" aria-label="DisabledInput" disabled readonly>
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <label class="form-label">Medicine Reminder Shifts</label>
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingFour">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                    Morning
+                                            </button>
+                                            </h2>
+                                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <thead class="table-primary">
+                                                                <tr>
+                                                                    <th scope="col">Day</th>
+                                                                    <th scope="col">Time</th>
+                                                                    <th scope="col">Medicines</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Monday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Tuesday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Saturday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingFive">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                                    Afternoon
+                                            </button>
+                                            </h2>
+                                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <thead class="table-primary">
+                                                                <tr>
+                                                                    <th scope="col">Day</th>
+                                                                    <th scope="col">Time</th>
+                                                                    <th scope="col">Medicines</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Monday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Tuesday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Saturday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingSix">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                                    Evening
+                                            </button>
+                                            </h2>
+                                            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <thead class="table-primary">
+                                                                <tr>
+                                                                    <th scope="col">Day</th>
+                                                                    <th scope="col">Time</th>
+                                                                    <th scope="col">Medicines</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Monday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Tuesday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Saturday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card med_shift mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="title">User Three</h3>
+                                <div>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#ExportData" class="btn btn-success btn-sm me-2"><i class="fa-solid fa-download"></i> Export</a>
+                                    <a href="#" class="btn btn-danger btn-sm me-2"><i class="fa-solid fa-trash-can"></i> Delete</a>
+                                    <a href="medreminder.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-pencil"></i> Edit</a>
+                                </div>
+                            </div>
+                            <form class="row">
+                                <div class="col-md-4 mt-3">
+                                    <label class="form-label">Patient Name</label>
+                                    <input type="text" class="form-control" id="MedicineName" placeholder="User Three" aria-label="DisabledInput" disabled readonly>
+                                </div>
+                                <div class="col-md-4 mt-3">
+                                    <label class="form-label">Mac Address</label>
+                                    <input type="text" class="form-control" id="MedicineName" placeholder="192.168.1.100" aria-label="DisabledInput" disabled readonly>
+                                </div>
+                                <div class="col-md-4 mt-3">
+                                    <label class="form-label">No. of Reminders</label>
+                                    <input type="text" class="form-control" id="MedicineName" placeholder="5" aria-label="DisabledInput" disabled readonly>
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <label class="form-label">Medicine Reminder Shifts</label>
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingSeven">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                                    Morning
+                                            </button>
+                                            </h2>
+                                            <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <thead class="table-primary">
+                                                                <tr>
+                                                                    <th scope="col">Day</th>
+                                                                    <th scope="col">Time</th>
+                                                                    <th scope="col">Medicines</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Monday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Tuesday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Saturday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingEight">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                                    Afternoon
+                                            </button>
+                                            </h2>
+                                            <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <thead class="table-primary">
+                                                                <tr>
+                                                                    <th scope="col">Day</th>
+                                                                    <th scope="col">Time</th>
+                                                                    <th scope="col">Medicines</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Monday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Tuesday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Saturday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingNine">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                                                    Evening
+                                            </button>
+                                            </h2>
+                                            <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <thead class="table-primary">
+                                                                <tr>
+                                                                    <th scope="col">Day</th>
+                                                                    <th scope="col">Time</th>
+                                                                    <th scope="col">Medicines</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Monday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Tuesday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Saturday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card med_shift mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <h3 class="title">User Four</h3>
+                                <div>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#ExportData" class="btn btn-success btn-sm me-2"><i class="fa-solid fa-download"></i> Export</a>
+                                    <a href="#" class="btn btn-danger btn-sm me-2"><i class="fa-solid fa-trash-can"></i> Delete</a>
+                                    <a href="medreminder.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-pencil"></i> Edit</a>
+                                </div>
+                            </div>
+                            <form class="row">
+                                <div class="col-md-4 mt-3">
+                                    <label class="form-label">Patient Name</label>
+                                    <input type="text" class="form-control" id="MedicineName" placeholder="User Four" aria-label="DisabledInput" disabled readonly>
+                                </div>
+                                <div class="col-md-4 mt-3">
+                                    <label class="form-label">Mac Address</label>
+                                    <input type="text" class="form-control" id="MedicineName" placeholder="192.168.1.100" aria-label="DisabledInput" disabled readonly>
+                                </div>
+                                <div class="col-md-4 mt-3">
+                                    <label class="form-label">No. of Reminders</label>
+                                    <input type="text" class="form-control" id="MedicineName" placeholder="5" aria-label="DisabledInput" disabled readonly>
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <label class="form-label">Medicine Reminder Shifts</label>
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingTen">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                                                    Morning
+                                            </button>
+                                            </h2>
+                                            <div id="collapseTen" class="accordion-collapse collapse" aria-labelledby="headingTen" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <thead class="table-primary">
+                                                                <tr>
+                                                                    <th scope="col">Day</th>
+                                                                    <th scope="col">Time</th>
+                                                                    <th scope="col">Medicines</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Monday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Tuesday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Saturday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingEleven">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+                                                    Afternoon
+                                            </button>
+                                            </h2>
+                                            <div id="collapseEleven" class="accordion-collapse collapse" aria-labelledby="headingEleven" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <thead class="table-primary">
+                                                                <tr>
+                                                                    <th scope="col">Day</th>
+                                                                    <th scope="col">Time</th>
+                                                                    <th scope="col">Medicines</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Monday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Tuesday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Saturday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingTwelve">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
+                                                    Evening
+                                            </button>
+                                            </h2>
+                                            <div id="collapseTwelve" class="accordion-collapse collapse" aria-labelledby="headingTwelve" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <thead class="table-primary">
+                                                                <tr>
+                                                                    <th scope="col">Day</th>
+                                                                    <th scope="col">Time</th>
+                                                                    <th scope="col">Medicines</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Monday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Tuesday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Saturday</td>
+                                                                    <td>08:12:08, Wed 16 Mar 2022</td>
+                                                                    <td>Pharmeasy, Pharmeasy, Pharmeasy, Pharmeasy</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="d-flex justify-content-end">
+                        <nav aria-label="...">
+                            <ul class="pagination">
+                                <li class="page-item disabled">
+                                    <a class="page-link">Previous</a>
+                                </li>
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Add Device Modal -->
+
+    <!-- Modal Add Device -->
+    <div class="modal fade" id="AddDevice" tabindex="-1" aria-labelledby="AddDeviceLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddDeviceLabel">Add New Device</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row">
+                        <div class="col-md-12 mt-3">
+                            <label class="form-label">Patient Name</label>
+                            <input type="text" class="form-control" id="MedicineName" placeholder="Enter Patient Name" aria-label="DisabledInput">
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <label class="form-label">Mac Address</label>
+                            <input type="text" class="form-control" id="MedicineName" placeholder="Enter Mac ID" aria-label="DisabledInput">
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <label class="form-label">Device Status</label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected="">Set Status</option>
+                                <option value="1">Active</option>
+                                <option value="2">Inactive</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Add Device</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Export Data -->
+    <div class="modal fade" id="ExportData" tabindex="-1" aria-labelledby="ExportDataLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ExportDataLabel">Export Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row">
+                        <div class="col-md-12 mt-3">
+                            <label class="form-label">Select By Date Range</label>
+                            <div class="row g-3">
+                                <div class="col">
+                                    <input type="date" class="form-control" id="DateImport" placeholder="Enter Patient Name">
+                                </div>
+                                <div class="col">
+                                    <input type="date" class="form-control" id="DateImport" placeholder="Enter Patient Name">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="assets/js/main.js"></script> -->
+    <script src="assets/js/toastr.js"></script>
+    <script src="assets/fonts/fontawesome/js/all.min.js"></script>
+    <!-- <script src="assets/plugins/simplebar/simplebar.min.js"></script> -->
+    <!-- <script src="assets/plugins/tinyslider/tiny-slider.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="assets/plugins/izitoast/iziToast.min.js"></script>
+    <!-- <script src="assets/plugins/bootstrap-select/bootstrap-select.min.js"></script> -->
+    <script src="assets/plugins/mdtimepicker/mdtimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/9.5.4/sweetalert2.all.min.js"></script>
+
+    <script>
+        mdtimepicker(document.querySelector('#timepicker'));
+        mdtimepicker(document.querySelector('#timepickertwo'));
+        mdtimepicker(document.querySelector('#timepickerthree'));
+    </script>
+    <script>
+        $(function() {
+            $('input[name="datetimes"]').daterangepicker({
+                timePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().startOf('hour').add(32, 'hour'),
+                locale: {
+                    format: 'M/DD hh:mm A'
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).on('click', '#setreminder', function(e) {
+            Swal.fire(
+                'Reminder Set',
+                'Reminder Is Set <b style="color:green;">Successfully</b>',
+                'success'
+            )
+        });
+        $(document).on('click', '#addmedicine', function(e) {
+            Swal.fire(
+                'Medicine Added',
+                'Medicine Added <b style="color:green;">Successfully</b>',
+                'success'
+            )
+        });
+        $(document).on('click', '#logout', function(e) {
+            Swal.fire({
+                title: 'Are you sure want to logout?',
+                // text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0178e6',
+                cancelButtonColor: '#E92E46',
+                confirmButtonText: 'Yes, Logout!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Logout!',
+                        'You are Logout Successfully.',
+                        'success'
+                    )
+                }
+            })
+        });
+    </script>
+    <script>
+        function startTime() {
+            var today = new Date();
+            var hr = today.getHours();
+            var min = today.getMinutes();
+            var sec = today.getSeconds();
+            ap = (hr < 12) ? "<span>AM</span>" : "<span>PM</span>";
+            hr = (hr == 0) ? 12 : hr;
+            hr = (hr > 12) ? hr - 12 : hr;
+            //Add a zero in front of numbers<10
+            hr = checkTime(hr);
+            min = checkTime(min);
+            sec = checkTime(sec);
+            document.getElementById("clock").innerHTML = hr + ":" + min + ":" + sec + " " + ap;
+
+            var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            var curWeekDay = days[today.getDay()];
+            var curDay = today.getDate();
+            var curMonth = months[today.getMonth()];
+            var curYear = today.getFullYear();
+            var date = curWeekDay + ", " + curDay + " " + curMonth + " " + curYear;
+            document.getElementById("date").innerHTML = date;
+
+            var time = setTimeout(function() {
+                startTime()
+            }, 500);
+        }
+
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+    </script>
+</body>
+
+</html>

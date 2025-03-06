@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="52.07" height="36.88" viewBox="0 0 52.07 36.88">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_4" data-name="Rectangle 4" width="52.07" height="36.88" transform="translate(708 279)" fill="#0acf83"/>
+    </clipPath>
+  </defs>
+  <g id="Mask_Group_1" data-name="Mask Group 1" transform="translate(-708 -279)" clip-path="url(#clip-path)">
+    <path id="sketch-svgrepo-com" d="M47.019,20.579,36.707,7.691a.33.33,0,0,0-.254-.122H15.565a.33.33,0,0,0-.254.122L5,20.579a.33.33,0,0,0,.01.422L25.765,44.342a.32.32,0,0,0,.244.107.347.347,0,0,0,.244-.107L47.009,21a.33.33,0,0,0,.01-.422ZM32.775,10.485l1.747,6.8-6.731-6.8Zm.417,9.068H18.826l7.183-7.259ZM19.243,10.485h4.983l-6.736,6.8Zm-2.713.356-2.24,8.712H9.56l6.97-8.712ZM9.885,22.092h4.8l6.391,12.583L9.885,22.092ZM26.009,38.78,17.531,22.092H34.482Zm4.933-4.1,6.4-12.583h4.8L30.942,34.675Zm6.787-15.123-2.24-8.712,6.97,8.712H37.728Z" transform="translate(708.026 271.431)" fill="#0acf83"/>
+  </g>
+</svg>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/fonts/fontawesome/css/all.min.css" rel="stylesheet">
+    <link href="assets/fonts/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <!-- <link href="assets/plugins/simplebar/simplebar.min.css" rel="stylesheet"> -->
+    <!-- <link href="assets/plugins/tinyslider/tiny-slider.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="assets/plugins/izitoast/iziToast.min.css">
+    <!-- <link rel="stylesheet" href="assets/plugins/bootstrap-select/bootstrap-select.min.css"> -->
+    <link rel="stylesheet" href="assets/plugins/mdtimepicker/mdtimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/9.5.4/sweetalert2.min.css">
+    <title>MedBox - Medreminder</title>
+</head>
+
+<body onload="startTime()">
+    <header>
+        <div class="medbox_header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="d-flex justify-content-between">
+                            <a href="#"><img src="assets/img/medreminder_logo.PNG" width="160" alt=""></a>
+                            <button type="submit" class="btn btn-dark login_btn" id="logout"><span class="me-2">Log Out</span><i class='bx bx-lock fs-20'></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="medbox_block">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 offset-lg-4">
+                    <div class="display_date mt-5">
+                        <form>
+                            <fieldset disabled>
+                                <div id="clockdate">
+                                    <div class="clockdate-wrapper">
+                                        <div id="clock"></div>
+                                        <div id="date"></div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-lg-4">
+                    <div class="card med_shift">
+                        <div class="card-body">
+                            <h3 class="title">Morning</h3>
+
+                            <div class="mt-4">
+                                <label class="form-label">Add Medicine</label>
+                                <input type="text" class="form-control" id="MedicineName" placeholder="Enter Medicine Name">
+                                <button type="submit" class="btn btn-dark AddMed_btn mt-3" id="addmedicine">Add Medicine</button>
+                            </div>
+
+                            <div class="mt-4">
+                                <label class="form-label">Set Time</label>
+                                <div class="timepicker_div">
+                                    <input type="text" class="form-control" placeholder="Set Time" id="timepicker" data-mintime="1:00 AM" data-maxtime="now" />
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <!-- <select class="form-select" aria-label="Default select example">
+                                    <option selected>Set Reminder</option>
+                                    <option value="1">Daily</option>
+                                    <option value="2">Weekly</option>
+                                    <option value="3">Quaterly</option>
+                                    <option value="4">Yearly</option>
+                                </select> -->
+                                <div>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" checked="" name="choose_55"> 
+                                        <span class="btn btn-light"> Mon </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Tue </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Wed </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Thr </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Fri </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Sat </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Sun </span> 
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <label class="form-label">Set Reminder</label>
+                                <input type="text" class="form-control" placeholder="Set Time" name="datetimes" />
+                                <button type="submit" class="btn btn--primary remind_btn mt-3" id="setreminder">Set Reminder</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" data-bs-toggle="modal" data-bs-target="#AddNewReminder" class="btn btn-outline-success btn-sm remind_btn mt-3">Add New Reminder</button>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card med_shift">
+                        <div class="card-body">
+                            <h3 class="title">Afternoon</h3>
+
+                            <div class="mt-4">
+                                <label class="form-label">Add Medicine</label>
+                                <input type="text" class="form-control" id="MedicineName" placeholder="Enter Medicine Name">
+                                <button type="submit" class="btn btn-dark AddMed_btn mt-3" id="addmedicine">Add Medicine</button>
+                            </div>
+
+                            <div class="mt-4">
+                                <label class="form-label">Set Time</label>
+                                <div class="timepicker_div">
+                                    <input type="text" class="form-control" placeholder="Set Time" id="timepickertwo" data-mintime="1:00 AM" data-maxtime="now" />
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <div>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" checked="" name="choose_55"> 
+                                        <span class="btn btn-light"> Mon </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Tue </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Wed </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Thr </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Fri </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Sat </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Sun </span> 
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <label class="form-label">Set Reminder</label>
+                                <input type="text" class="form-control" placeholder="Set Time" name="datetimes" />
+                                <button type="submit" class="btn btn--primary remind_btn mt-3" id="setreminder">Set Reminder</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" data-bs-toggle="modal" data-bs-target="#AddNewReminder" class="btn btn-outline-success btn-sm remind_btn mt-3">Add New Reminder</button>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card med_shift">
+                        <div class="card-body">
+                            <h3 class="title">Evening</h3>
+
+                            <div class="mt-4">
+                                <label class="form-label">Add Medicine</label>
+                                <input type="text" class="form-control" id="MedicineName" placeholder="Enter Medicine Name">
+                                <button type="submit" class="btn btn-dark AddMed_btn mt-3" id="addmedicine">Add Medicine</button>
+                            </div>
+
+                            <div class="mt-4">
+                                <label class="form-label">Set Time</label>
+                                <div class="timepicker_div">
+                                    <input type="text" class="form-control" placeholder="Set Time" id="timepickerthree" data-mintime="1:00 AM" data-maxtime="now" />
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <div>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" checked="" name="choose_55"> 
+                                        <span class="btn btn-light"> Mon </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Tue </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Wed </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Thr </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Fri </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Sat </span> 
+                                    </label>
+                                    <label class="checkbox-btn"> 
+                                        <input type="checkbox" name="choose_55"> 
+                                        <span class="btn btn-light"> Sun </span> 
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <label class="form-label">Set Reminder</label>
+                                <input type="text" class="form-control" placeholder="Set Time" name="datetimes" />
+                                <button type="submit" class="btn btn--primary remind_btn mt-3" id="setreminder">Set Reminder</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" data-bs-toggle="modal" data-bs-target="#AddNewReminder" class="btn btn-outline-success btn-sm remind_btn mt-3">Add New Reminder</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Export Data -->
+    <div class="modal fade" id="AddNewReminder" tabindex="-1" aria-labelledby="AddNewReminderLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddNewReminderLabel">Add New Reminder</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mt-4">
+                        <label class="form-label">Add Medicine</label>
+                        <input type="text" class="form-control" id="MedicineName" placeholder="Enter Medicine Name">
+                        <button type="submit" class="btn btn-dark AddMed_btn mt-3" id="addmedicine">Add Medicine</button>
+                    </div>
+
+                    <div class="mt-4">
+                        <label class="form-label">Set Time</label>
+                        <div class="timepicker_div">
+                            <input type="text" class="form-control" placeholder="Set Time" id="timepickerfour" data-mintime="1:00 AM" data-maxtime="now" />
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div>
+                            <label class="checkbox-btn"> 
+                                <input type="checkbox" checked="" name="choose_55"> 
+                                <span class="btn btn-light"> Mon </span> 
+                            </label>
+                            <label class="checkbox-btn"> 
+                                <input type="checkbox" name="choose_55"> 
+                                <span class="btn btn-light"> Tue </span> 
+                            </label>
+                            <label class="checkbox-btn"> 
+                                <input type="checkbox" name="choose_55"> 
+                                <span class="btn btn-light"> Wed </span> 
+                            </label>
+                            <label class="checkbox-btn"> 
+                                <input type="checkbox" name="choose_55"> 
+                                <span class="btn btn-light"> Thr </span> 
+                            </label>
+                            <label class="checkbox-btn"> 
+                                <input type="checkbox" name="choose_55"> 
+                                <span class="btn btn-light"> Fri </span> 
+                            </label>
+                            <label class="checkbox-btn"> 
+                                <input type="checkbox" name="choose_55"> 
+                                <span class="btn btn-light"> Sat </span> 
+                            </label>
+                            <label class="checkbox-btn"> 
+                                <input type="checkbox" name="choose_55"> 
+                                <span class="btn btn-light"> Sun </span> 
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <label class="form-label">Set Reminder</label>
+                        <input type="text" class="form-control" placeholder="Set Time" name="datetimes" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="setreminder">Set Reminder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="assets/js/main.js"></script> -->
+    <script src="assets/js/toastr.js"></script>
+    <script src="assets/fonts/fontawesome/js/all.min.js"></script>
+    <!-- <script src="assets/plugins/simplebar/simplebar.min.js"></script> -->
+    <!-- <script src="assets/plugins/tinyslider/tiny-slider.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="assets/plugins/izitoast/iziToast.min.js"></script>
+    <!-- <script src="assets/plugins/bootstrap-select/bootstrap-select.min.js"></script> -->
+    <script src="assets/plugins/mdtimepicker/mdtimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/9.5.4/sweetalert2.all.min.js"></script>
+
+    <script>
+        mdtimepicker(document.querySelector('#timepicker'));
+        mdtimepicker(document.querySelector('#timepickertwo'));
+        mdtimepicker(document.querySelector('#timepickerthree'));
+        mdtimepicker(document.querySelector('#timepickerfour'));
+    </script>
+    <script>
+        $(function() {
+            $('input[name="datetimes"]').daterangepicker({
+                timePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().startOf('hour').add(32, 'hour'),
+                locale: {
+                    format: 'M/DD hh:mm A'
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).on('click', '#setreminder', function(e) {
+            Swal.fire(
+                'Reminder Set',
+                'Reminder Is Set <b style="color:green;">Successfully</b>',
+                'success'
+            )
+        });
+        $(document).on('click', '#addmedicine', function(e) {
+            Swal.fire(
+                'Medicine Added',
+                'Medicine Added <b style="color:green;">Successfully</b>',
+                'success'
+            )
+        });
+        $(document).on('click', '#logout', function(e) {
+            Swal.fire({
+                title: 'Are you sure want to logout?',
+                // text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0178e6',
+                cancelButtonColor: '#E92E46',
+                confirmButtonText: 'Yes, Logout!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Logout!',
+                        'You are Logout Successfully.',
+                        'success'
+                    )
+                }
+            })
+        });
+    </script>
+    <script>
+        function startTime() {
+            var today = new Date();
+            var hr = today.getHours();
+            var min = today.getMinutes();
+            var sec = today.getSeconds();
+            ap = (hr < 12) ? "<span>AM</span>" : "<span>PM</span>";
+            hr = (hr == 0) ? 12 : hr;
+            hr = (hr > 12) ? hr - 12 : hr;
+            //Add a zero in front of numbers<10
+            hr = checkTime(hr);
+            min = checkTime(min);
+            sec = checkTime(sec);
+            document.getElementById("clock").innerHTML = hr + ":" + min + ":" + sec + " " + ap;
+
+            var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            var curWeekDay = days[today.getDay()];
+            var curDay = today.getDate();
+            var curMonth = months[today.getMonth()];
+            var curYear = today.getFullYear();
+            var date = curWeekDay + ", " + curDay + " " + curMonth + " " + curYear;
+            document.getElementById("date").innerHTML = date;
+
+            var time = setTimeout(function() {
+                startTime()
+            }, 500);
+        }
+
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+    </script>
+</body>
+
+</html>
